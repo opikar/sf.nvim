@@ -219,7 +219,9 @@ H.diff_in_target_org = function()
 end
 
 H.diff_in_org = function()
-  U.is_table_empty(H.orgs)
+  if vim.tbl_isempty(H.orgs) then
+    return U.show_err("No orgs available. Run :SF org list first.")
+  end
 
   vim.ui.select(H.orgs, {
     prompt = "Select org to diff in:",
